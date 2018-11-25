@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/RuleRepository" xmlns:tns="http://www.example.org/RuleRepository" elementFormDefault="qualified">
+
+
+    <complexType name="AssignAction">
+    	<complexContent>
+    		<extension base="tns:Action">
+    			<sequence>
+    				<element name="Target" type="string"></element>
+    				<element name="Expression" type="string"></element>
+    			</sequence>
+    		</extension>
+    	</complexContent>
+    </complexType>
+
+    <complexType name="ExecuteAction">
+    	<complexContent>
+    		<extension base="tns:Action">
+    			<sequence>
+    				<element name="Expression" type="string"></element>
+    			</sequence>
+    		</extension>
+    	</complexContent>
+    </complexType>
+
+    <complexType name="EvaluateAction">
+    	<complexContent>
+    		<extension base="tns:Action">
+    			<sequence>
+    				<element name="DecisionTable" type="string"></element>
+    			</sequence>
+    		</extension>
+    	</complexContent>
+    </complexType>
+
+    <complexType name="RuleAction">
+    	<complexContent>
+    		<extension base="tns:Action"></extension>
+    	</complexContent>
+    </complexType>
+
+    <complexType name="RuleSetAction">
+    	<complexContent>
+    		<extension base="tns:Action"></extension>
+    	</complexContent>
+    </complexType>
+
+    <complexType name="Rule">
+    	<sequence>
+    		<element name="Name" type="string"></element>
+    		<element name="Condition" type="string"></element>
+    		<element name="Actions" type="tns:ActionList" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="ElseActions" type="tns:ActionList"
+    			maxOccurs="1" minOccurs="0">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="RuleSet">
+    	<sequence>
+    		<element name="Name" type="string"></element>
+    		<element name="Rules" type="tns:RuleList"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="Action">
+    	<sequence>
+    		<element name="Order" type="int"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="RuleList">
+    	<sequence>
+    		<element name="Rule" type="tns:Rule" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="ActionList">
+    	<sequence>
+    		<element name="Action" type="string" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="FunctionDefinition">
+    	<sequence>
+    		<element name="Name" type="string"></element>
+    		<element name="ReturnType" type="string"></element>
+    		<element name="Parameters" type="tns:ParametersList"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="ParametersList">
+    	<sequence>
+    		<element name="Parameter" type="tns:Parameter"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Parameter">
+    	<sequence>
+    		<element name="Name" type="string"></element>
+    		<element name="Type" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="DecisionTable">
+    	<sequence>
+    		<element name="Name" type="string"></element>
+    		<element name="Columns" type="tns:ColumnList"></element>
+    		<element name="Rows" type="tns:RowList"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="ColumnList">
+    	<sequence>
+    		<element name="Column" type="tns:Column"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Column">
+    	<sequence>
+    		<element name="Name" type="string"></element>
+    		<element name="Type" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="RowList">
+    	<sequence>
+    		<element name="Row" type="tns:Row"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Row"></complexType>
+</schema>
